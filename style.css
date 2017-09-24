@@ -1,0 +1,182 @@
+    body {
+        font-size: 18px;
+    }
+    
+    p {
+        font-size: 20px;
+    }
+    /*===============================
+            Header
+===============================*/
+    
+    header {
+        box-shadow: 0 -3px 14px 12px rgba(0, 0, 0, 0.2);
+        margin-bottom: 35px;
+        height: 100vh;
+        padding-top: calc(50vh - 200px) !important;
+    }
+    
+    header.slate>.image>img {
+        filter: blur(2px);
+        transform: scale(1.2);
+    }
+    
+    header .header:not(.sub) {
+        font-size: 2em !important;
+    }
+    
+    header .description {
+        font-size: 1.35em !important;
+    }
+
+    header.slate>#iconDiv{
+        margin-top: 3.5em;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    header.slate>#iconDiv>a>i{
+        color: #fff;
+        text-rendering: optimizelegibility;
+        text-shadow: 0 0 3px rgba(0,0,0,0.8);
+        opacity: .75;
+        text-align: center;
+    }
+
+    header.slate>#iconDiv>a>i:hover{
+        opacity: 1;
+    }
+
+    #avater {
+        max-height: 170px;
+        border-radius: 100em;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 12px 0px rgba(0, 0, 0, 0.3);
+    }
+    /*===============================
+             Skills
+===============================*/
+    
+    h1.header {
+        margin-left: 10px;
+    }
+    
+    skills {
+        display: flex;
+        flex-wrap: wrap;
+        margin: -0.875em -0.5em;
+        margin-bottom: 35px;
+    }
+    
+    skill {
+        width: calc(100% / 6 - 20px);
+        box-shadow: 0 5px 10px 1px rgba(167, 167, 167, 0.2);
+        padding: 1.5em;
+        border-radius: 1rem;
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        transition: all .1s ease;
+        height: calc(100% / 6 - 20px);
+    }
+    
+    skill:hover {
+        box-shadow: 0 5px 10px 1px rgba(167, 167, 167, 0.4);
+        transform: translateY(-1px);
+    }
+    
+    skill i {
+        font-style: normal;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        user-select: none;
+        font-size: 7em;
+        text-align: center;
+        width: 100%;
+        display: block;
+    }
+
+    skills .content {
+        font-family: 'Jura', sans-serif;
+        font-weight: 700;
+        font-size: 1.4em;
+        text-align: center;
+        color: #5d5d5d;
+        opacity: 0;
+        margin-top: 1em;
+    }
+    /* Unlocking */
+    
+    i.icons>i {
+        opacity: .2;
+    }
+    
+    i.icons>i.lock.icon {
+        font-size: 3em;
+        opacity: 1;
+    }
+    /* RWD */
+    
+    @media(max-width: 1200px) {
+        skill {
+            width: calc(100% / 4 - 20px);
+        }
+    }
+    
+    @media(max-width: 1000px) {
+        skill {
+            width: calc(100% / 2 - 20px);
+        }
+        skill:hover {
+            box-shadow: 0 5px 10px 1px rgba(167, 167, 167, 0.2);
+        }
+    }
+    
+    @media(max-width: 390px) {
+        skill {
+            width: calc(100% - 20px);
+        }
+    }
+    /*===============================
+             Works
+===============================*/
+    
+    .ts.card {
+        border: 0px solid #e9e;
+        box-shadow: 0 5px 10px 1px rgba(167, 167, 167, 0.2);
+        transition: all .1s ease;
+    }
+    
+    .ts.card:hover {
+        border: 0px solid #e99 !important;
+        box-shadow: 0 5px 10px 1px rgba(167, 167, 167, 0.4) !important;
+        transform: translateY(-1px) !important;
+    }
+    
+    .ts.card>.content>.header+.description {
+        margin-top: .4em;
+    }
+
+    /* Show and hidden*/
+    @-webkit-keyframes fadeIn {
+    from { opacity: 0;}
+      to { opacity: .6;}
+    }  
+    @keyframes fadeIn {
+    from { opacity: 0;}
+      to { opacity: .6;}
+    }
+
+    skill .content {
+        position: absolute; visibility: hidden;
+      }
+    skill:hover .content {
+        opacity: .6;
+        position: static; visibility: visible;
+        -webkit-animation: fadeIn .5s;
+        animation: fadeIn .5s;
+      }
