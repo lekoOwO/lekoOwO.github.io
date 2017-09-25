@@ -13,7 +13,7 @@ header {
     box-shadow: 0 -3px 14px 12px rgba(0, 0, 0, 0.2);
     margin-bottom: 35px;
     height: 100vh;
-    padding-top: 25vh !important;
+    padding-top: calc(50vh - 7.75em) !important;
 }
 
 header.slate>.image>img {
@@ -52,7 +52,7 @@ header.slate>#iconDiv>.row>.column>a>i:hover{
 
 header.slate>#iconDiv{
     position:absolute;
-    bottom:2.75%;
+    padding-bottom:2.75%;
     right:0;
     left:0;
 }
