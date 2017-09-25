@@ -79,6 +79,21 @@
             transform: rotateY(360deg);
         }
     }
+
+     /* animation */
+     		     
+    .pace-done #avater {
+        animation: flip 1.25s ease;
+        animation-delay: .8s;
+    }
+
+    .pace-running header.slate>.image>img {
+        opacity: 0;
+    }
+
+    .pace-done header.slate>.image>img {
+        animation: fadeIn 3s ease;
+    }
     /* RWD */
     
     @media(max-height: 400px) {
@@ -111,6 +126,8 @@
         margin-right: 10px;
         transition: all .2s ease;
         height: calc(100% / 6 - 20px);
+        user-select: none;
+        cursor: default;
     }
     
     skill:hover {
@@ -181,18 +198,20 @@
              Works
 ===============================*/
     
-    .ts.card {
+    a.ts.card {
         border: 0px solid #e9e;
         box-shadow: 0 5px 10px 1px rgba(167, 167, 167, 0.2);
         transition: all .1s ease;
+        user-select: none;
     }
     
-    .ts.card:hover {
+    a.ts.card:hover {
         border: 0px solid #e99 !important;
         box-shadow: 0 5px 10px 1px rgba(167, 167, 167, 0.4) !important;
         transform: translateY(-1px) !important;
+        user-select: none;
     }
     
-    .ts.card>.content>.header+.description {
+    a.ts.card>.content>.header+.description {
         margin-top: .4em;
     }

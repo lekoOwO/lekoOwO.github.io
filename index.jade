@@ -27,13 +27,14 @@ html
 		link(rel="icon" href="favicon.ico")
 
 		include ./../Jade/_tocasui.jade
-		link(href='https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css',rel='stylesheet')
-		link(href='https://fonts.googleapis.com/css?family=Jura',rel='stylesheet')
-		link(href='https://jakiestfu.github.io/Ripple.js/dist/ripple.min.css',rel='stylesheet')
-		script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js")
-		script(src="https://jakiestfu.github.io/Ripple.js/dist/ripple.min.js")
-		script(src="script.js")
-		link(href='style.css',rel='stylesheet')
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js", async="true")
+		link(href='https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css',rel='stylesheet',media="none",onload="if(media!='all')media='all'")
+		link(href='https://fonts.googleapis.com/css?family=Jura',rel='stylesheet',media="none",onload="if(media!='all')media='all'")
+		link(href='https://jakiestfu.github.io/Ripple.js/dist/ripple.min.css',rel='stylesheet',media="none",onload="if(media!='all')media='all'")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js", async="true")
+		script(src="https://jakiestfu.github.io/Ripple.js/dist/ripple.min.js", defer="true")
+		script(src="script.js",defer="true")
+		link(href='style.css',rel='stylesheet',media="none",onload="if(media!='all')media='all'")
 
 		include ./../Jade/_tags.jade
 		+social_tags('Rex','這裡是 Rex，某鬼島上的可愛(X)高中生。','https://rextw.com/img/og.png','https://rextw.com/')
