@@ -29,14 +29,16 @@
         font-size: 1.35em !important;
     }
 
-    header.slate>#iconDiv{
-        margin-top: 3.5em;
+    header.slate>#iconDiv>.row{
         margin-left: auto;
         margin-right: auto;
         text-align: center;
     }
 
-    header.slate>#iconDiv>a>i{
+    header.slate{
+        position:relative;
+    }
+    header.slate>#iconDiv>.row>.column>a>i{
         color: #fff;
         text-rendering: optimizelegibility;
         text-shadow: 0 0 3px rgba(0,0,0,0.8);
@@ -44,8 +46,15 @@
         text-align: center;
     }
 
-    header.slate>#iconDiv>a>i:hover{
+    header.slate>#iconDiv>.row>.column>a>i:hover{
         opacity: 1;
+    }
+
+    header.slate>#iconDiv{
+        position:absolute;
+        bottom:5%;
+        right:0px;
+        left:0px;
     }
 
     #avater {
