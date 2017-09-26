@@ -13,7 +13,7 @@
         box-shadow: 0 -3px 14px 12px rgba(0, 0, 0, 0.2);
         margin-bottom: 35px;
         height: 100vh;
-        padding-top: calc(50vh - 7.75em) !important;
+        padding-top: 13vh !important;
     }
     
     header.slate>.image>img {
@@ -52,7 +52,7 @@
 
     header.slate>#iconDiv{
         position:absolute;
-        bottom:2.75%;
+        bottom:5vh;
         right:0;
         left:0;
     }
