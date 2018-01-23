@@ -19,4 +19,5 @@ $(window).on('load', function(){
     $(".cssload-thecube").fadeOut("slow",function(){
         $("#contents").fadeIn("normal");
         });
+    $(".cssload-thecube").remove();
     });
