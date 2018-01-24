@@ -16,8 +16,5 @@ $.ripple("skill,.card", {
     }); 
 
 $(window).on('load', function(){
-    $(".cssload-thecube").fadeOut("slow",function(){
-        $("#contents").fadeIn("normal");
+    $("#contents").fadeIn("normal");
         });
-    $(".cssload-thecube").remove();
-    });
