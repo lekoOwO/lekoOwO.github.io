@@ -27,7 +27,7 @@ html
         link(rel="icon" href="favicon.ico")
         include ./Jades/_tags.jade
         +social_tags('Rex','這裡是 Rex，某鬼島上的可愛(X)高中生。','https://rextw.com/img/og.png','https://rextw.com/')
-    body
+    body(onload='$("#contents").fadeIn("normal");')
         noscript#deferred-styles
             link(href='https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css',rel='stylesheet',type="text/css")
             link(href='https://fonts.googleapis.com/css?family=Jura',rel='stylesheet',type="text/css")
@@ -40,7 +40,7 @@ html
         script(data-cfasync="true" src="https://jakiestfu.github.io/Ripple.js/dist/ripple.min.js", defer="true")
         script(data-cfasync="true" src='https://rawgit.com/rexx0520/RandomPic-1/master/randompicture2.js', defer="true")
         script(data-cfasync="true" src='https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.js', async="true")
-        script(src="script.js", defer="true")
+        script(data-cfasync="true" src="script.js", defer="true")
         #contents(style='display:none;')
             header.ts.fluid.big.slate
                 .image
