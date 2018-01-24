@@ -14,10 +14,3 @@ $.ripple("skill,.card", {
     },
     easing: 'linear' // The CSS3 easing function of the ripple
     }); 
-
-$(window).on('load', function(){
-    $(".cssload-thecube").fadeOut("slow",function(){
-        $("#contents").fadeIn("normal");
-        });
-    $(".cssload-thecube").remove();
-    });
