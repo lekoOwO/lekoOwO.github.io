@@ -1,1 +1,1 @@
-$.ripple("skill,.card",{debug:!1,on:"mousedown",opacity:.4,color:"auto",multi:!0,duration:.4,rate:function(n){return n},easing:"linear"}),$(window).on("load",function(){$("#contents").fadeIn("normal")});
+$.ripple("skill,.card",{debug:!1,on:"mousedown",opacity:.4,color:"auto",multi:!0,duration:.4,rate:function(n){return n},easing:"linear"}),window.onload=$("#contents").fadeIn("normal");

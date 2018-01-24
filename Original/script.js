@@ -15,6 +15,4 @@ $.ripple("skill,.card", {
     easing: 'linear' // The CSS3 easing function of the ripple
     }); 
 
-$(window).on('load', function(){
-    $("#contents").fadeIn("normal");
-        });
+window.onload=$("#contents").fadeIn("normal");
