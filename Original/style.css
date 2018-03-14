@@ -134,6 +134,12 @@
         box-shadow: 0 5px 10px 1px rgba(167, 167, 167, 0.4);
         transform: translateY(-1.25px);
     }
+
+    skill img{
+        display: block;
+        height: 7em;
+        margin:auto;
+    }
     
     skill i {
         font-style: normal;
