@@ -1,4 +1,4 @@
-window.addEventListener("DOMContentLoaded", function(){
+window.addEventListener("load", function(){
     $("#contents").fadeIn("normal");
     const observer = lozad(); // lazy loads elements with default selector as '.lozad'
     observer.observe();
