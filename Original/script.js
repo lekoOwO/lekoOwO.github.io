@@ -1,3 +1,9 @@
+window.addEventListener("DOMContentLoaded", function(){
+    $("#contents").fadeIn("normal");
+    const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+    observer.observe();
+});
+
 /*====================
      Ripple
 ====================*/
@@ -15,8 +21,3 @@ $.ripple("skill,.card", {
     easing: 'linear' // The CSS3 easing function of the ripple
     }); 
 
-window.addEventListener("load", function(){
-    $("#contents").fadeIn("normal");
-    const observer = lozad(); // lazy loads elements with default selector as '.lozad'
-    observer.observe();
-});
