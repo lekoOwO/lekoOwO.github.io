@@ -17,11 +17,6 @@ header {
     padding-top: 13vh !important;
 }
 
-header.slate>.image>img {
-    filter: blur(2px);
-    transform: scale(1.2);
-}
-
 header .header:not(.sub) {
     font-size: 2em !important;
 }
