@@ -132,6 +132,11 @@ skill:hover {
     transform: translateY(-1.25px);
 }
 
+skill a{
+    display: block;
+    margin:auto;
+}
+
 skill img{
     display: block;
     height: 7em;
@@ -166,14 +171,17 @@ skills .content {
     margin-top: 1em;
 }
 /* Unlocking */
+skill.unlocking img{
+    opacity: .3;
+}
 
 i.icons>i {
-    opacity: .2;
+    opacity: .3;
 }
 
 i.icons>i.lock.icon {
     font-size: 3em;
-    opacity: 1;
+    opacity:1
 }
 /* RWD */
 
