@@ -13,7 +13,7 @@ mixin skillUnlocking(content)
 mixin works(img,header,description,link,comment) 
     a.ts.card(href=link)
         .image
-            img(src=img)
+            img.lozad(data-src=img)
         .content
             .header=header
             .description=description
@@ -40,6 +40,7 @@ html
         script(data-cfasync="true" src="https://jakiestfu.github.io/Ripple.js/dist/ripple.min.js", defer="true")
         script(data-cfasync="true" src='https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.js', async="true")
         script(data-cfasync="true" src="script.js", defer="true")
+        script(data-cfasync="true" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js", defer="true")
         #contents(style='display:none;')
             header.ts.fluid.big.slate
                 .image
