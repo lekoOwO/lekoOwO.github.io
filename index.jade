@@ -13,7 +13,7 @@ mixin skillUnlocking(content)
 mixin works(img,header,description,link,comment) 
     a.ts.card(href=link)
         .image
-            imgc(data-src=img)
+            img.lozad(data-src=img)
         .content
             .header=header
             .description=description
