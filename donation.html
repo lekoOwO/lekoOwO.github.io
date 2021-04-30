@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.css">
     <!-- Tocas JS：模塊與 JavaScript 函式 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.js"></script>
-    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script src="qr-code-with-logo.browser.min.js"></script>
     <style>
         .image.background>img {
             opacity: 0.625;
@@ -22,9 +22,23 @@
         }
     </style>
     <script>
-        function getQrCode(text) {
-            const qrcode = new QRCode(document.createElement("div"), text);
-            const canvas = qrcode._oDrawing._elCanvas;
+
+        async function getQrCode(text, imageURL) {
+            const canvas = document.createElement("canvas");
+            await QrCodeWithLogo.toCanvas({
+                canvas,
+                content: text,
+                width: 380,
+                logo: {
+                    src: imageURL,
+                    borderSize: 0,
+                    bgColor: "transparent",
+                    logoSize: 0.2
+                },
+                nodeQrCodeOptions: {
+                    margin: 2
+                }
+            })
             return canvas.toDataURL('image/webp');
         }
 
@@ -32,10 +46,11 @@
             return new Promise(r => setTimeout(r, ms));
         }
 
-        document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("DOMContentLoaded", async () => {
             for (const e of [...document.querySelectorAll("img.qrcode")]) {
                 const text = e.dataset.qr;
-                e.src = getQrCode(text);
+                const logo = e.dataset.logo;
+                e.src = await getQrCode(text, logo);
             }
             for (const e of [...document.querySelectorAll("button.qrcode")]) {
                 e.addEventListener("click", ev => {
@@ -88,7 +103,9 @@
 
             <div class="ts raised card">
                 <div class="image">
-                    <img class="qrcode" data-qr="3NcxUKs9pChVPJWYC95GFqjMNcYTycpnuG">
+                    <img class="qrcode"
+                         data-qr="3NcxUKs9pChVPJWYC95GFqjMNcYTycpnuG"
+                         data-logo="/img/bitcoin.svg">
                 </div>
                 <div class="content">
                     <div class="center aligned header">BTC</div>
@@ -100,7 +117,9 @@
 
             <div class="ts raised card">
                 <div class="image">
-                    <img class="qrcode" data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F">
+                    <img class="qrcode" 
+                         data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F"
+                         data-logo="/img/ethereum.png">
                 </div>
                 <div class="content">
                     <div class="center aligned header">ETH</div>
@@ -112,7 +131,9 @@
 
             <div class="ts raised card">
                 <div class="image">
-                    <img class="qrcode" data-qr="TC7d4HUVt1ZYW9VHTDnLF71QSBJoWTNsKV">
+                    <img class="qrcode" 
+                         data-qr="TC7d4HUVt1ZYW9VHTDnLF71QSBJoWTNsKV"
+                         data-logo="/img/usdt.svg">
                 </div>
                 <div class="content">
                     <div class="center aligned header">USDT (TRC-20)</div>
@@ -124,7 +145,9 @@
 
             <div class="ts raised card">
                 <div class="image">
-                    <img class="qrcode" data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F">
+                    <img class="qrcode" 
+                         data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F"
+                         data-logo="/img/usdt.svg">
                 </div>
                 <div class="content">
                     <div class="center aligned header">USDT (ERC-20)</div>
@@ -136,7 +159,9 @@
 
             <div class="ts raised card">
                 <div class="image">
-                    <img class="qrcode" data-qr="MH7jWFVHPqrPE5pro3agnyynPA6ixa8Kcc">
+                    <img class="qrcode" 
+                         data-qr="MH7jWFVHPqrPE5pro3agnyynPA6ixa8Kcc"
+                         data-logo="/img/usdt.svg">
                 </div>
                 <div class="content">
                     <div class="center aligned header">LTC</div>
@@ -151,7 +176,9 @@
 
             <div class="ts raised card">
                 <div class="image">
-                    <img class="qrcode" data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F">
+                    <img class="qrcode" 
+                         data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F"
+                         data-logo="/img/usdc.svg">
                 </div>
                 <div class="center aligned content">
                     <div class="header">USDC (ERC-20)</div>
