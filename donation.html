@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+    <!-- Tocas UI：CSS 與元件 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.css">
+    <!-- Tocas JS：模塊與 JavaScript 函式 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.js"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <style>
+        .image.background>img {
+            opacity: 0.625;
+        }
+    </style>
+    <script>
+        function getQrCode(text) {
+            const qrcode = new QRCode(document.createElement("div"), text);
+            const canvas = qrcode._oDrawing._elCanvas;
+            return canvas.toDataURL('image/webp');
+        }
+
+        async function sleep(ms = 0) {
+            return new Promise(r => setTimeout(r, ms));
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            for (const e of [...document.querySelectorAll("img.qrcode")]) {
+                const text = e.dataset.qr;
+                e.src = getQrCode(text);
+            }
+            for (const e of [...document.querySelectorAll("button.qrcode")]) {
+                e.addEventListener("click", ev => {
+                    const text = ev.target.parentNode.parentNode.querySelector("img.qrcode").dataset.qr;
+                    navigator.clipboard.writeText(text).then(async () => {
+                        const copied = document.getElementById("copied")
+                        copied.classList.add("active")
+                        await sleep(2000)
+                        copied.classList.remove("active")
+                    })
+                })
+            }
+        })
+    </script>
+</head>
+
+<body>
+    <div class="ts large very padded fluid slate">
+        <div class="image background">
+            <img
+                src="https://i.guim.co.uk/img/media/36f79572fa1be7d95b3d88fa12332fd79a8551a4/0_73_4708_2825/master/4708.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=8b575684418f4e6182781dc6297daad7">
+        </div>
+        <h1 class="ts inverted center aligned header">
+            贊助雷雷
+            <div class="sub header">
+                馬麻先幫你把紅包存起來
+            </div>
+        </h1>
+    </div>
+    <br><br>
+    <div class="ts container">
+        <div class="ts segment">
+            <div class="ts big header">關於</div>
+            <p>
+                如果你願意的話，歡迎小額贊助雷雷
+                <br>
+                讓雷雷有錢可以喝杯珍奶或吃頓壽喜燒 yay
+            </p>
+        </div>
+        <div class="ts doubling four cards">
+            <div class="ts raised card">
+                <a class="image"
+                    href="https://qrcodepay.line.me/qr/payment/7eQ%252BaZgtiK6DGNOHBfWfT1UHXW54JCVCPvYi%252Fr5ZCKMGBemN0cY%252FwZe2CZPgv99i">
+                    <img src="img/mylinepay.svg">
+                </a>
+                <div class="content">
+                    <div class="center aligned header">Line Pay</div>
+                </div>
+            </div>
+
+            <div class="ts raised card">
+                <div class="image">
+                    <img class="qrcode" data-qr="3NcxUKs9pChVPJWYC95GFqjMNcYTycpnuG">
+                </div>
+                <div class="content">
+                    <div class="center aligned header">BTC</div>
+                </div>
+                <div class="ts fluid bottom attached buttons">
+                    <button class="ts qrcode button">複製地址</button>
+                </div>
+            </div>
+
+            <div class="ts raised card">
+                <div class="image">
+                    <img class="qrcode" data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F">
+                </div>
+                <div class="content">
+                    <div class="center aligned header">ETH</div>
+                </div>
+                <div class="ts fluid bottom attached buttons">
+                    <button class="ts qrcode button">複製地址</button>
+                </div>
+            </div>
+
+            <div class="ts raised card">
+                <div class="image">
+                    <img class="qrcode" data-qr="TC7d4HUVt1ZYW9VHTDnLF71QSBJoWTNsKV">
+                </div>
+                <div class="content">
+                    <div class="center aligned header">USDT (TRC-20)</div>
+                </div>
+                <div class="ts fluid bottom attached buttons">
+                    <button class="ts qrcode button">複製地址</button>
+                </div>
+            </div>
+
+            <div class="ts raised card">
+                <div class="image">
+                    <img class="qrcode" data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F">
+                </div>
+                <div class="content">
+                    <div class="center aligned header">USDT (ERC-20)</div>
+                </div>
+                <div class="ts fluid bottom attached buttons">
+                    <button class="ts qrcode button">複製地址</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ts bottom right snackbar" id="copied">
+        <div class="content">
+            已複製!
+        </div>
+    </div>
+</body>
+
+</html>
