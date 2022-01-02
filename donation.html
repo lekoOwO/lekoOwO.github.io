@@ -1,199 +1,265 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>贊助雷雷</title>
-    <meta name="description" content="馬麻先幫尼把紅包存起來">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta charset="utf-8">
-    <meta name="author" content="Leko">
+    <meta name="description" content="馬麻先幫尼把紅包存起來" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta charset="utf-8" />
+    <meta name="author" content="Leko" />
     <!-- Tocas UI：CSS 與元件 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.css"
+    />
     <!-- Tocas JS：模塊與 JavaScript 函式 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
     <script src="qr-code-with-logo.browser.min.js"></script>
     <style>
-        .image.background>img {
-            opacity: 0.625;
-        }
+      .image.background > img {
+        opacity: 0.625;
+      }
 
-        a.original {
-            color: inherit !important;
-        }
+      a.original {
+        color: inherit !important;
+      }
+
+      .clickable:hover {
+        cursor: pointer;
+      }
     </style>
     <script>
+      async function getQrCode(text, imageURL) {
+        const canvas = document.createElement("canvas");
+        await QrCodeWithLogo.toCanvas({
+          canvas,
+          content: text,
+          width: 380,
+          logo: {
+            src: imageURL,
+            borderSize: 0,
+            bgColor: "transparent",
+            logoSize: 0.2,
+          },
+          nodeQrCodeOptions: {
+            margin: 2,
+          },
+        });
+        return canvas.toDataURL("image/webp");
+      }
 
-        async function getQrCode(text, imageURL) {
-            const canvas = document.createElement("canvas");
-            await QrCodeWithLogo.toCanvas({
-                canvas,
-                content: text,
-                width: 380,
-                logo: {
-                    src: imageURL,
-                    borderSize: 0,
-                    bgColor: "transparent",
-                    logoSize: 0.2
-                },
-                nodeQrCodeOptions: {
-                    margin: 2
-                }
-            })
-            return canvas.toDataURL('image/webp');
+      async function sleep(ms = 0) {
+        return new Promise((r) => setTimeout(r, ms));
+      }
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        for (const e of [...document.querySelectorAll("img.qrcode")]) {
+          const text = e.dataset.qr;
+          const logo = e.dataset.logo;
+          e.src = await getQrCode(text, logo);
         }
-
-        async function sleep(ms = 0) {
-            return new Promise(r => setTimeout(r, ms));
+        for (const e of [...document.querySelectorAll("button.qrcode")]) {
+          e.addEventListener("click", (ev) => {
+            const text =
+              ev.target.parentNode.parentNode.querySelector("img.qrcode")
+                .dataset.qr;
+            navigator.clipboard.writeText(text).then(async () => {
+              const copied = document.getElementById("copied");
+              copied.classList.add("active");
+              await sleep(2000);
+              copied.classList.remove("active");
+            });
+          });
         }
-
-        document.addEventListener("DOMContentLoaded", async () => {
-            for (const e of [...document.querySelectorAll("img.qrcode")]) {
-                const text = e.dataset.qr;
-                const logo = e.dataset.logo;
-                e.src = await getQrCode(text, logo);
-            }
-            for (const e of [...document.querySelectorAll("button.qrcode")]) {
-                e.addEventListener("click", ev => {
-                    const text = ev.target.parentNode.parentNode.querySelector("img.qrcode").dataset.qr;
-                    navigator.clipboard.writeText(text).then(async () => {
-                        const copied = document.getElementById("copied")
-                        copied.classList.add("active")
-                        await sleep(2000)
-                        copied.classList.remove("active")
-                    })
-                })
-            }
-        })
+      });
     </script>
-</head>
+    <script>
+        const ABIS = {
+            USDT: [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_upgradedAddress","type":"address"}],"name":"deprecate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"deprecated","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_evilUser","type":"address"}],"name":"addBlackList","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"upgradedAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balances","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"maximumFee","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"unpause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_maker","type":"address"}],"name":"getBlackListStatus","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"address"}],"name":"allowed","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"paused","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"who","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"pause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"newBasisPoints","type":"uint256"},{"name":"newMaxFee","type":"uint256"}],"name":"setParams","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"issue","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"redeem","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"basisPointsRate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"isBlackListed","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_clearedUser","type":"address"}],"name":"removeBlackList","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"MAX_UINT","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_blackListedUser","type":"address"}],"name":"destroyBlackFunds","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"_initialSupply","type":"uint256"},{"name":"_name","type":"string"},{"name":"_symbol","type":"string"},{"name":"_decimals","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"amount","type":"uint256"}],"name":"Issue","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"amount","type":"uint256"}],"name":"Redeem","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"newAddress","type":"address"}],"name":"Deprecate","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"feeBasisPoints","type":"uint256"},{"indexed":false,"name":"maxFee","type":"uint256"}],"name":"Params","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_blackListedUser","type":"address"},{"indexed":false,"name":"_balance","type":"uint256"}],"name":"DestroyedBlackFunds","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_user","type":"address"}],"name":"AddedBlackList","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_user","type":"address"}],"name":"RemovedBlackList","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[],"name":"Pause","type":"event"},{"anonymous":false,"inputs":[],"name":"Unpause","type":"event"}],
+            USDC: [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_account","type":"address"}],"name":"unBlacklist","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"minter","type":"address"}],"name":"removeMinter","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"string"},{"name":"_symbol","type":"string"},{"name":"_currency","type":"string"},{"name":"_decimals","type":"uint8"},{"name":"_masterMinter","type":"address"},{"name":"_pauser","type":"address"},{"name":"_blacklister","type":"address"},{"name":"_owner","type":"address"}],"name":"initialize","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"masterMinter","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"unpause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"mint","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_amount","type":"uint256"}],"name":"burn","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"minter","type":"address"},{"name":"minterAllowedAmount","type":"uint256"}],"name":"configureMinter","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newPauser","type":"address"}],"name":"updatePauser","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"paused","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"account","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"pause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"minter","type":"address"}],"name":"minterAllowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"pauser","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newMasterMinter","type":"address"}],"name":"updateMasterMinter","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"account","type":"address"}],"name":"isMinter","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newBlacklister","type":"address"}],"name":"updateBlacklister","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"blacklister","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"owner","type":"address"},{"name":"spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"currency","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_account","type":"address"}],"name":"blacklist","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_account","type":"address"}],"name":"isBlacklisted","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"minter","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Mint","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"burner","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Burn","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"minter","type":"address"},{"indexed":false,"name":"minterAllowedAmount","type":"uint256"}],"name":"MinterConfigured","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"oldMinter","type":"address"}],"name":"MinterRemoved","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"newMasterMinter","type":"address"}],"name":"MasterMinterChanged","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_account","type":"address"}],"name":"Blacklisted","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_account","type":"address"}],"name":"UnBlacklisted","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"newBlacklister","type":"address"}],"name":"BlacklisterChanged","type":"event"},{"anonymous":false,"inputs":[],"name":"Pause","type":"event"},{"anonymous":false,"inputs":[],"name":"Unpause","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"newAddress","type":"address"}],"name":"PauserChanged","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"previousOwner","type":"address"},{"indexed":false,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"}]
+        }
+        Object.freeze(ABIS);
+        const CONTRACT_ADDRESSES = {
+            USDT: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+            USDC: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        }
+        Object.freeze(CONTRACT_ADDRESSES);
 
-<body>
+        function isMetaMask() {
+            return typeof window.ethereum !== "undefined";
+        }
+
+        const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+        async function sendETH(to) {
+            if (!isMetaMask()) return;
+
+            const accounts = await window.ethereum.request({
+                method: "eth_requestAccounts",
+            });
+            const result = await web3.eth.sendTransaction({
+                from: accounts[0],
+                to,
+            });
+            return result;
+        }
+
+        async function sendERC20(to, abi, contractAddress) {
+            if (!isMetaMask()) return;
+            const accounts = await window.ethereum.request({
+                method: "eth_requestAccounts",
+            });
+            const from = accounts[0];
+            const contract = await new web3.eth.Contract(abi, contractAddress);
+            console.log(contract);
+            contract.methods.transfer(to, 0).send({from});
+        }
+    </script>
+  </head>
+
+  <body>
     <div class="ts large very padded fluid slate">
-        <div class="image background">
-            <img
-                src="https://i.guim.co.uk/img/media/36f79572fa1be7d95b3d88fa12332fd79a8551a4/0_73_4708_2825/master/4708.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=8b575684418f4e6182781dc6297daad7">
-        </div>
-        <h1 class="ts inverted center aligned header">
-            贊助雷雷
-            <div class="sub header">
-                馬麻先幫你把紅包存起來
-            </div>
-        </h1>
+      <div class="image background">
+        <img
+          src="https://i.guim.co.uk/img/media/36f79572fa1be7d95b3d88fa12332fd79a8551a4/0_73_4708_2825/master/4708.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=8b575684418f4e6182781dc6297daad7"
+        />
+      </div>
+      <h1 class="ts inverted center aligned header">
+        贊助雷雷
+        <div class="sub header">馬麻先幫你把紅包存起來</div>
+      </h1>
     </div>
-    <br><br>
+    <br /><br />
     <div class="ts container">
-        <div class="ts segment">
-            <div class="ts big header">關於</div>
-            <p>
-                如果你願意的話，歡迎小額贊助雷雷
-                <br>
-                讓雷雷有錢可以喝杯珍奶或吃頓壽喜燒 yay
-            </p>
+      <div class="ts segment">
+        <div class="ts big header">關於</div>
+        <p>
+          如果你願意的話，歡迎小額贊助雷雷
+          <br />
+          讓雷雷有錢可以喝杯珍奶或吃頓壽喜燒 yay
+        </p>
+      </div>
+      <div class="ts doubling four cards">
+        <div class="ts raised card">
+          <a
+            class="image"
+            href="https://qrcodepay.line.me/qr/payment/7eQ%252BaZgtiK6DGNOHBfWfT1UHXW54JCVCPvYi%252Fr5ZCKMGBemN0cY%252FwZe2CZPgv99i"
+          >
+            <img src="img/mylinepay.svg" />
+          </a>
+          <div class="content">
+            <div class="center aligned header">Line Pay</div>
+          </div>
         </div>
-        <div class="ts doubling four cards">
-            <div class="ts raised card">
-                <a class="image"
-                    href="https://qrcodepay.line.me/qr/payment/7eQ%252BaZgtiK6DGNOHBfWfT1UHXW54JCVCPvYi%252Fr5ZCKMGBemN0cY%252FwZe2CZPgv99i">
-                    <img src="img/mylinepay.svg">
-                </a>
-                <div class="content">
-                    <div class="center aligned header">Line Pay</div>
-                </div>
-            </div>
 
-            <div class="ts raised card">
-                <div class="image">
-                    <img class="qrcode"
-                         data-qr="3NcxUKs9pChVPJWYC95GFqjMNcYTycpnuG"
-                         data-logo="/img/bitcoin.svg">
-                </div>
-                <div class="content">
-                    <div class="center aligned header">BTC</div>
-                </div>
-                <div class="ts fluid bottom attached buttons">
-                    <button class="ts qrcode button">複製地址</button>
-                </div>
-            </div>
-
-            <div class="ts raised card">
-                <div class="image">
-                    <img class="qrcode" 
-                         data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F"
-                         data-logo="/img/ethereum.png">
-                </div>
-                <div class="content">
-                    <div class="center aligned header">ETH</div>
-                </div>
-                <div class="ts fluid bottom attached buttons">
-                    <button class="ts qrcode button">複製地址</button>
-                </div>
-            </div>
-
-            <div class="ts raised card">
-                <div class="image">
-                    <img class="qrcode" 
-                         data-qr="TC7d4HUVt1ZYW9VHTDnLF71QSBJoWTNsKV"
-                         data-logo="/img/usdt.svg">
-                </div>
-                <div class="content">
-                    <div class="center aligned header">USDT (TRC-20)</div>
-                </div>
-                <div class="ts fluid bottom attached buttons">
-                    <button class="ts qrcode button">複製地址</button>
-                </div>
-            </div>
-
-            <div class="ts raised card">
-                <div class="image">
-                    <img class="qrcode" 
-                         data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F"
-                         data-logo="/img/usdt.svg">
-                </div>
-                <div class="content">
-                    <div class="center aligned header">USDT (ERC-20)</div>
-                </div>
-                <div class="ts fluid bottom attached buttons">
-                    <button class="ts qrcode button">複製地址</button>
-                </div>
-            </div>
-
-            <div class="ts raised card">
-                <div class="image">
-                    <img class="qrcode" 
-                         data-qr="MH7jWFVHPqrPE5pro3agnyynPA6ixa8Kcc"
-                         data-logo="/img/ltc.svg">
-                </div>
-                <div class="content">
-                    <div class="center aligned header">LTC</div>
-                    <div class="meta">
-                        <a class="original" href="https://steveyi.net/">@steveyiyo</a>: 你怎麼不收 LTC
-                    </div>
-                </div>
-                <div class="ts fluid bottom attached buttons">
-                    <button class="ts qrcode button">複製地址</button>
-                </div>
-            </div>
-
-            <div class="ts raised card">
-                <div class="image">
-                    <img class="qrcode" 
-                         data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F"
-                         data-logo="/img/usdc.svg">
-                </div>
-                <div class="center aligned content">
-                    <div class="header">USDC (ERC-20)</div>
-                </div>
-                <div class="ts fluid bottom attached buttons">
-                    <button class="ts qrcode button">複製地址</button>
-                </div>
-            </div>
+        <div class="ts raised card">
+          <div class="image">
+            <img
+              class="qrcode"
+              data-qr="3NcxUKs9pChVPJWYC95GFqjMNcYTycpnuG"
+              data-logo="/img/bitcoin.svg"
+            />
+          </div>
+          <div class="content">
+            <div class="center aligned header">BTC</div>
+          </div>
+          <div class="ts fluid bottom attached buttons">
+            <button class="ts qrcode button">複製地址</button>
+          </div>
         </div>
+
+        <div class="ts raised card">
+          <div class="image">
+            <img
+              class="qrcode clickable"
+              data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F"
+              data-logo="/img/ethereum.png"
+              onclick='sendETH("0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F")'
+            />
+          </div>
+          <div class="content">
+            <div class="center aligned header">ETH</div>
+          </div>
+          <div class="ts fluid bottom attached buttons">
+            <button class="ts qrcode button">複製地址</button>
+          </div>
+        </div>
+
+        <div class="ts raised card">
+          <div class="image">
+            <img
+              class="qrcode"
+              data-qr="TC7d4HUVt1ZYW9VHTDnLF71QSBJoWTNsKV"
+              data-logo="/img/usdt.svg"
+            />
+          </div>
+          <div class="content">
+            <div class="center aligned header">USDT (TRC-20)</div>
+          </div>
+          <div class="ts fluid bottom attached buttons">
+            <button class="ts qrcode button">複製地址</button>
+          </div>
+        </div>
+
+        <div class="ts raised card">
+          <div class="image">
+            <img
+              class="qrcode clickable"
+              data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F"
+              data-logo="/img/usdt.svg"
+              onclick="sendERC20('0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F', ABIS.USDT, CONTRACT_ADDRESSES.USDT)"
+            />
+          </div>
+          <div class="content">
+            <div class="center aligned header">USDT (ERC-20)</div>
+          </div>
+          <div class="ts fluid bottom attached buttons">
+            <button class="ts qrcode button">複製地址</button>
+          </div>
+        </div>
+
+        <div class="ts raised card">
+          <div class="image">
+            <img
+              class="qrcode"
+              data-qr="MH7jWFVHPqrPE5pro3agnyynPA6ixa8Kcc"
+              data-logo="/img/ltc.svg"
+            />
+          </div>
+          <div class="content">
+            <div class="center aligned header">LTC</div>
+            <div class="meta">
+              <a class="original" href="https://steveyi.net/">@steveyiyo</a>:
+              你怎麼不收 LTC
+            </div>
+          </div>
+          <div class="ts fluid bottom attached buttons">
+            <button class="ts qrcode button">複製地址</button>
+          </div>
+        </div>
+
+        <div class="ts raised card">
+          <div class="image">
+            <img
+              class="qrcode clickable"
+              data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F"
+              data-logo="/img/usdc.svg"
+              onclick="sendERC20('0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F', ABIS.USDC, CONTRACT_ADDRESSES.USDC)"
+            />
+          </div>
+          <div class="center aligned content">
+            <div class="header">USDC (ERC-20)</div>
+          </div>
+          <div class="ts fluid bottom attached buttons">
+            <button class="ts qrcode button">複製地址</button>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="ts bottom right snackbar" id="copied">
-        <div class="content">
-            已複製!
-        </div>
+      <div class="content">已複製!</div>
     </div>
-</body>
-
+  </body>
 </html>
