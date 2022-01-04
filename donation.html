@@ -111,10 +111,8 @@
             const accounts = await window.ethereum.request({
                 method: "eth_requestAccounts",
             });
-            const from = accounts[0];
             const contract = await new web3.eth.Contract(abi, contractAddress);
-            console.log(contract);
-            contract.methods.transfer(to, 0).send({from});
+            contract.methods.transfer(to, 0).send({from: accounts[0]});
         }
     </script>
   </head>
@@ -123,7 +121,7 @@
     <div class="ts large very padded fluid slate">
       <div class="image background">
         <img
-          src="https://i.guim.co.uk/img/media/36f79572fa1be7d95b3d88fa12332fd79a8551a4/0_73_4708_2825/master/4708.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=8b575684418f4e6182781dc6297daad7"
+          src="img/donation-background.webp"
         />
       </div>
       <h1 class="ts inverted center aligned header">
@@ -153,7 +151,53 @@
             <div class="center aligned header">Line Pay</div>
           </div>
         </div>
-
+        <div class="ts raised card">
+          <div class="image">
+            <img
+              class="qrcode clickable"
+              data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F"
+              data-logo="/img/usdt.svg"
+              onclick="sendERC20('0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F', ABIS.USDT, CONTRACT_ADDRESSES.USDT)"
+            />
+          </div>
+          <div class="content">
+            <div class="center aligned header">USDT (ERC-20) | MaiCoin</div>
+          </div>
+          <div class="ts fluid bottom attached buttons">
+            <button class="ts qrcode button">複製地址</button>
+          </div>
+        </div>
+        <div class="ts raised card">
+          <div class="image">
+            <img
+              class="qrcode"
+              data-qr="TC7d4HUVt1ZYW9VHTDnLF71QSBJoWTNsKV"
+              data-logo="/img/usdt.svg"
+            />
+          </div>
+          <div class="content">
+            <div class="center aligned header">USDT (TRC-20) | MaiCoin</div>
+          </div>
+          <div class="ts fluid bottom attached buttons">
+            <button class="ts qrcode button">複製地址</button>
+          </div>
+        </div>
+        <div class="ts raised card">
+          <div class="image">
+            <img
+              class="qrcode clickable"
+              data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F"
+              data-logo="/img/usdc.svg"
+              onclick="sendERC20('0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F', ABIS.USDC, CONTRACT_ADDRESSES.USDC)"
+            />
+          </div>
+          <div class="center aligned content">
+            <div class="header">USDC (ERC-20) | MaiCoin</div>
+          </div>
+          <div class="ts fluid bottom attached buttons">
+            <button class="ts qrcode button">複製地址</button>
+          </div>
+        </div>
         <div class="ts raised card">
           <div class="image">
             <img
@@ -163,7 +207,24 @@
             />
           </div>
           <div class="content">
-            <div class="center aligned header">BTC</div>
+            <div class="center aligned header">BTC | MaiCoin</div>
+          </div>
+          <div class="ts fluid bottom attached buttons">
+            <button class="ts qrcode button">複製地址</button>
+          </div>
+        </div>
+
+        <div class="ts raised card">
+          <div class="image">
+            <img
+              class="qrcode clickable"
+              data-qr="0xFF1A95f995c15F778454e345cbabFE4465382e95"
+              data-logo="/img/ethereum.png"
+              onclick='sendETH("0xFF1A95f995c15F778454e345cbabFE4465382e95")'
+            />
+          </div>
+          <div class="content">
+            <div class="center aligned header">ETH | Metamask</div>
           </div>
           <div class="ts fluid bottom attached buttons">
             <button class="ts qrcode button">複製地址</button>
@@ -180,40 +241,7 @@
             />
           </div>
           <div class="content">
-            <div class="center aligned header">ETH</div>
-          </div>
-          <div class="ts fluid bottom attached buttons">
-            <button class="ts qrcode button">複製地址</button>
-          </div>
-        </div>
-
-        <div class="ts raised card">
-          <div class="image">
-            <img
-              class="qrcode"
-              data-qr="TC7d4HUVt1ZYW9VHTDnLF71QSBJoWTNsKV"
-              data-logo="/img/usdt.svg"
-            />
-          </div>
-          <div class="content">
-            <div class="center aligned header">USDT (TRC-20)</div>
-          </div>
-          <div class="ts fluid bottom attached buttons">
-            <button class="ts qrcode button">複製地址</button>
-          </div>
-        </div>
-
-        <div class="ts raised card">
-          <div class="image">
-            <img
-              class="qrcode clickable"
-              data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F"
-              data-logo="/img/usdt.svg"
-              onclick="sendERC20('0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F', ABIS.USDT, CONTRACT_ADDRESSES.USDT)"
-            />
-          </div>
-          <div class="content">
-            <div class="center aligned header">USDT (ERC-20)</div>
+            <div class="center aligned header">ETH | MaiCoin</div>
           </div>
           <div class="ts fluid bottom attached buttons">
             <button class="ts qrcode button">複製地址</button>
@@ -229,28 +257,11 @@
             />
           </div>
           <div class="content">
-            <div class="center aligned header">LTC</div>
+            <div class="center aligned header">LTC | MaiCoin</div>
             <div class="meta">
               <a class="original" href="https://steveyi.net/">@steveyiyo</a>:
               你怎麼不收 LTC
             </div>
-          </div>
-          <div class="ts fluid bottom attached buttons">
-            <button class="ts qrcode button">複製地址</button>
-          </div>
-        </div>
-
-        <div class="ts raised card">
-          <div class="image">
-            <img
-              class="qrcode clickable"
-              data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F"
-              data-logo="/img/usdc.svg"
-              onclick="sendERC20('0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F', ABIS.USDC, CONTRACT_ADDRESSES.USDC)"
-            />
-          </div>
-          <div class="center aligned content">
-            <div class="header">USDC (ERC-20)</div>
           </div>
           <div class="ts fluid bottom attached buttons">
             <button class="ts qrcode button">複製地址</button>
