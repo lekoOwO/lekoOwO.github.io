@@ -106,7 +106,9 @@
             return result;
         }
 
-        async function sendERC20(to, abi, contractAddress) {
+        async function sendERC20(to, tokenType) {
+            const abi = ABIS[tokenType];
+            const contractAddress = CONTRACT_ADDRESSES[tokenType];
             if (!isMetaMask()) return;
             const accounts = await window.ethereum.request({
                 method: "eth_requestAccounts",
@@ -157,7 +159,7 @@
               class="qrcode clickable"
               data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F"
               data-logo="/img/usdt.svg"
-              onclick="sendERC20('0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F', ABIS.USDT, CONTRACT_ADDRESSES.USDT)"
+              onclick="sendERC20('0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F', 'USDT')"
             />
           </div>
           <div class="content">
@@ -207,7 +209,7 @@
               class="qrcode clickable"
               data-qr="0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F"
               data-logo="/img/usdc.svg"
-              onclick="sendERC20('0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F', ABIS.USDC, CONTRACT_ADDRESSES.USDC)"
+              onclick="sendERC20('0x2c89290E33548F1ED2Cf497fA5Cf7Aa9e7A2938F', 'USDC')"
             />
           </div>
           <div class="center aligned content">
