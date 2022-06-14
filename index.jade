@@ -13,7 +13,7 @@ mixin skillUnlocking(content)
 mixin works(img, header, description, link, comment) 
     a.ts.card(href=link)
         .image
-            img.lozad(data-src=img)
+            img.lozad(data-src=img class="thumbnail")
         .content
             .header=header
             .description=description
@@ -118,6 +118,7 @@ html
                     +works('/img/spleeter.webp','spleeter-api','將音樂人聲與伴奏分離的 Web App','https://github.com/lekoOwO/spleeter-api', '*包含 spleeter-web')
                     +works('/img/WheresMySupa.webp','WheresMySupa','將 Youtube 串流存檔中的 Superchat 取出/過濾並還原為高解析度的圖檔','https://github.com/lekoOwO/WheresMySupa')
                     +works('/img/ytarchive-ui.webp', 'YTArchive UI','Youtube 串流下載器的 Web UI', 'https://github.com/lekoOwO/ytarchive-ui')
+                    +works('/img/vt-twitter-adv-search.webp', 'Twitter Advanced QueryGen','VTuber Fan Art 的 Twitter 進階搜尋', 'https://tt.tools.nycu.moe')
                     +works('/img/brotli.webp', 'Brotli Decoder','純 Client 解壓縮 Brotli 檔案的 Web UI', 'https://brotli.leko.moe')
                     +works('/img/zstd.webp', 'ZStandard Decoder','純 Client 解壓縮 ZStandard 檔案的 Web UI', 'https://zstd.leko.moe')
                     +works('/img/hololive.web.app.webp', 'Hololive 開台通知','Hololive 開台通知訂閱', 'https://hololive.web.app/index.html')
@@ -125,6 +126,7 @@ html
                     +works('/img/ytsc.webp', 'Youtube SuperChat Generator','Youtube SC 截圖產生器','https://ytsc.leko.moe/')
                     +works('/img/tgimg.webp', 'TGiMG','Telegram 截圖產生器，造謠關三天。','https://tgimg.leko.moe')
                     +works('/img/ytrec.webp', 'Youtube Timestamp Recorder','Youtube 時間標記 Web App，烤肉 MAN 小工具','https://ytrc.leko.moe/')
+                    +works('/img/stuin-codegen.webp', 'STUIN CodeGen','雷雷的 STUIN Peering CodeGen', 'https://stuin.leko.moe/')
                     +works('/img/radius.webp', '無線網路訪客註冊系統','中央大學通訊系的訪客網路管理系統','#')
                     +works('/img/RepliDA.webp', 'RepliDA','可讓使用者建立課程所需 VM 環境並提交給管理員以便大量部署的網管工具','https://github.com/lekoOwO/RepliDA')
                 h1.ts.header 沒有 GUI 的專案
