@@ -1,10 +1,10 @@
 lockfileVersion: 5.3
 
 specifiers:
-  pug: 3.0.1
+  pug: 3.0.2
 
 dependencies:
-  pug: 3.0.1
+  pug: 3.0.2
 
 packages:
 
@@ -234,8 +234,8 @@ packages:
     resolution: {integrity: sha512-yYELe9Q5q9IQhuvqsZNwA5hfPkMJ8u92bQLIMcsMxf/VADjNtEYptU+inlufAFYcWdHlwNfZOEnOOQrZrcyJCQ==}
     dev: false
 
-  /pug/3.0.1:
-    resolution: {integrity: sha512-9v1o2yXMfSKJy2PykKyWUhpgx9Pf9D/UlPgIs2pTTxR6DQZ0oivy4I9f8PlWXRY4sjIhDU4TMJ7hQmYnNJc2bw==}
+  /pug/3.0.2:
+    resolution: {integrity: sha512-bp0I/hiK1D1vChHh6EfDxtndHji55XP/ZJKwsRqrz6lRia6ZC2OZbdAymlxdVFwd1L70ebrVJw4/eZ79skrIaw==}
     dependencies:
       pug-code-gen: 3.0.2
       pug-filters: 4.0.0
