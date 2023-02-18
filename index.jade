@@ -33,7 +33,7 @@ html
         meta(charset='utf-8')
         link(rel="icon" href="favicon.ico")
         include ./Jades/_tags.jade
-        +social_tags('Leko','這裡是 Leko，某鬼島上的可愛(X)大學生。','https://leko.moe/img/og.webp','https://leko.moe')
+        +social_tags('Leko','這裡是 Leko owo。','https://leko.moe/img/og.webp','https://leko.moe')
     body
         noscript#deferred-styles
             link(href='https://fonts.googleapis.com/css?family=Jura',rel='stylesheet',type="text/css")
@@ -53,7 +53,7 @@ html
                     img(src="bg.svg")
                 img(src='avatar.webp',id='avater')
                 span.header Leko
-                span.description 更加了解 Leko ️❤
+                span.description 更加了解 Leko ️
                 #iconDiv.ts.grid.stackable
                     .doubling.sixteen.centered.column.row
                         //- .column
@@ -72,7 +72,7 @@ html
             .ts.container
                 h1.ts.header 自我介紹
                 p
-                    |這裡是 Leko，某鬼島上的可愛大學生(?
+                    |這裡是 Leko，交大資工碩過勞研究生(?
                     br
                     |歡迎拍打
                     a(href="donation.html") 餵食
@@ -130,7 +130,8 @@ html
                     +works('/img/stuin-codegen.webp', 'STUIN CodeGen','雷雷的 STUIN Peering CodeGen', 'https://stuin.leko.moe/')
                     +works('/img/txtconvert-z.webp', 'TxtConvert-Z', 'txt 簡轉繁', 'https://txt.leko.moe/')
                     +works('/img/radius.webp', '無線網路訪客註冊系統','中央大學通訊系的訪客網路管理系統','#')
-                    +works('/img/RepliDA.webp', 'RepliDA','可讓使用者建立課程所需 VM 環境並提交給管理員以便大量部署的網管工具','https://github.com/lekoOwO/RepliDA')
+                    //- +works('/img/RepliDA.webp', 'RepliDA','可讓使用者建立課程所需 VM 環境並提交給管理員以便大量部署的網管工具','https://github.com/lekoOwO/RepliDA')
+                    +works('/img/WebEncode.webp', '檔案編碼工具箱','純本地實作的檔案編碼工具箱','https://enc.leko.moe')
                 h1.ts.header 沒有 GUI 的專案
                 .ts.vertical.menu.medium
                     +subworks('auto-ytarchive-raw','YouTube 直播自動保存 Freg JSON、影片移除提醒、開台通知、自動聊天室存檔等','https://github.com/lekoOwO/auto-ytarchive-raw')
