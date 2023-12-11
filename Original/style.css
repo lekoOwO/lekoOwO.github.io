@@ -140,7 +140,8 @@ skill a{
 skill img{
     display: block;
     height: 7em;
-    margin:auto;
+    width: 7em;
+    margin: auto;
 }
 
 skill i {
